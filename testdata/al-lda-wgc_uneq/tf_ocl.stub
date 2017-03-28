@@ -1,0 +1,12 @@
+KEDF CONFIG
+ThomasFermi
+ITERATIONS
+1
+CARTESIAN GRID DIMENSIONS
+16 32 48
+CARTESIAN CELL VECTORS
+     1.985   1.985    0.0
+     0.0     3.970    3.970
+     5.955   0.0      5.955
+GRID CONFIG
+clfft,out-of-place
