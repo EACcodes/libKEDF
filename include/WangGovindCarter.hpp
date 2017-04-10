@@ -13,7 +13,6 @@
 using namespace std;
 using namespace arma;
 
-#include "FullWangGovindCarter.hpp"
 #include "TayloredWangGovindCarter.hpp"
 
 class WangGovindCarterODE : public ODEKernel {
@@ -22,18 +21,6 @@ public:
     WangGovindCarterODE(const double beta, const double gamma);
     ~WangGovindCarterODE();
     void evaluate(const double t, double y[], double yp[]) override;
-    
-private:
-    double _beta;
-    double _gamma;
-};
-
-class FullWangGovindCarterODE{
-    
-public:
-    FullWangGovindCarterODE(const double beta, const double gamma);
-    ~FullWangGovindCarterODE();
-    double evaluate(const double t, vec *y, size_t m);
     
 private:
     double _beta;
@@ -92,24 +79,6 @@ private:
     double *_nls_wpp;
     double *_nls_w1pp;
     double *_nls_w2pp;
-};
-
-class NumericalFullWangGovindCarterKernel {
-    
-public:
-    NumericalFullWangGovindCarterKernel(const double alpha, const double beta, const double gamma, const double rhoS);
-    ~NumericalFullWangGovindCarterKernel();
-    
-    void fillWGCKernel(vec* x, vec* w, vec* w1);
-        
-private:
-    double _tkFStar;
-    double _alpha;
-    double _beta;
-    double _gamma;
-    double _rhoS;
-    
-    void rungeKutta(FullWangGovindCarterODE* ode, vec *x, mat *y, size_t n, size_t m, double b, double h);
 };
 
 class NumericalRealSpaceWangGovindCarterKernel {
