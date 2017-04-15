@@ -11,13 +11,13 @@ module libkedfinterface
     logical, save :: usesingleprec = .false.
     
     interface
-        subroutine libkedf_init (libkedf_data)
+        function libkedf_init ()
             
             use iso_c_binding
 
-            type(c_ptr), intent(out) :: libkedf_data
+            type(c_ptr) :: libkedf_init
             
-        end subroutine libkedf_init
+        end function libkedf_init
     end interface
     
     interface
@@ -27,7 +27,7 @@ module libkedfinterface
 
             type(c_ptr), intent(inout) :: libkedf_data
             integer(kind=c_int), intent(in) :: x,y,z
-            real(kind=8), dimension(:), intent(in) :: vecX, vecY, vecZ
+            real(kind=8), intent(in) :: vecX, vecY, vecZ
             
         end subroutine libkedf_initialize_grid
     end interface
@@ -40,20 +40,9 @@ module libkedfinterface
 
             type(c_ptr), intent(inout) :: libkedf_data
             integer(kind=c_int), intent(in) :: x,y,z, platformNo, deviceNo
-            real(kind=8), dimension(:), intent(in) :: vecX, vecY, vecZ
+            real(kind=8), intent(in) :: vecX, vecY, vecZ
             
         end subroutine libkedf_initialize_grid_ocl
-    end interface
-    interface
-        subroutine libkedf_initialize_grid_ocl_singleprec (libkedf_data, x, y, z, vecX, vecY, vecZ, platformNo, deviceNo)
-
-            use iso_c_binding
-
-            type(c_ptr), intent(inout) :: libkedf_data
-            integer(kind=c_int), intent(in) :: x,y,z, platformNo, deviceNo
-            real(kind=8), dimension(:), intent(in) :: vecX, vecY, vecZ
-
-        end subroutine libkedf_initialize_grid_ocl_singleprec
     end interface
 #endif
     
@@ -63,7 +52,7 @@ module libkedfinterface
             use iso_c_binding
 
             type(c_ptr), intent(inout) :: libkedf_data
-            real(kind=8), dimension(:), intent(in) :: vecX, vecY, vecZ
+            real(kind=8), intent(in) :: vecX, vecY, vecZ
             
         end subroutine libkedf_update_cellvectors
     end interface
